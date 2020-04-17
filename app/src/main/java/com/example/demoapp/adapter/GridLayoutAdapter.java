@@ -41,7 +41,6 @@ public class GridLayoutAdapter extends RecyclerView.Adapter<GridLayoutAdapter.Gr
 
         Glide.with(holder.imageView.getContext())
                 .load(dataList.get(position).getCat_card())
-                .placeholder(R.drawable.ic_news)
                 .into(holder.imageView);
 
         holder.tv_title.setText(dataList.get(position).getTitle());
