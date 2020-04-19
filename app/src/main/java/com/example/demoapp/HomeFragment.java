@@ -17,7 +17,6 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-
 import com.example.demoapp.adapter.GridLayoutAdapter;
 import com.example.demoapp.modal.Data;
 import com.example.demoapp.modal.DataMenu;
@@ -46,11 +45,10 @@ public class HomeFragment extends Fragment implements GridLayoutAdapter.EventLis
     private MyInterface myInterface;
     private DataModel dataModel;
     private List<DataMenu> newDataList;
-    private Button btn_save;
-    List<String> stringList = new ArrayList<>();
+    private List<String> stringList = new ArrayList<>();
 
     public HomeFragment() {
-        // Required empty public constructor
+        //Required empty public constructor
     }
 
     @Override
@@ -83,43 +81,10 @@ public class HomeFragment extends Fragment implements GridLayoutAdapter.EventLis
         recyclerView = view.findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
-//        imageList.add(R.drawable.ic_news);
 
-//        titleList.add("News");
-//        titleList.add("Business");
-//        titleList.add("Drama");
-//        titleList.add("Tech");
-//        titleList.add("Sports");
-//        titleList.add("Astro");
-//        titleList.add("Fitness");
-//        titleList.add("Mumbai");
-//        titleList.add("Bharat");
-//        titleList.add("Kids");
-//        titleList.add("UP");
-//        titleList.add("MP");
-//        titleList.add("Punjab");
-//        titleList.add("World");
-//        titleList.add("Delhi");
-//        titleList.add("Crime");
-        //recyclerView.setAdapter(new GridLayoutAdapter(imageList,titleList,false));
         myInterface = MyAPI.getClient(getContext()).create(MyInterface.class);
 
-        btn_save = view.findViewById(R.id.btn_save);
+        Button btn_save = view.findViewById(R.id.btn_save);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +103,8 @@ public class HomeFragment extends Fragment implements GridLayoutAdapter.EventLis
             @Override
             public void onResponse(@NotNull Call<DataModel> call, @NotNull Response<DataModel> response) {
                 dataModel = response.body();
-                assert dataModel != null;
+
+                assert dataModel != null; // for NullPointerException
                 Data data = dataModel.getData();
                 List<Hamburger_menu> hamburger = data.getHamburger_menu();
                  for(int i=0;i<hamburger.size();i++)
@@ -163,7 +129,6 @@ public class HomeFragment extends Fragment implements GridLayoutAdapter.EventLis
     @Override
     public void onEvent(int position) {
         String id = newDataList.get(position).getId();
-
         if (stringList.contains(id)){
             stringList.remove(id);
         }else {
